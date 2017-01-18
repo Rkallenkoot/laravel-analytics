@@ -157,11 +157,11 @@ class Analytics
      * @param  array $others
      * @return int
      */
-    public function getActiveUsers($others = array())
+    public function getActiveUsers($others = array()) : int
     {
         $response = $this->performRealtimeQuery('rt:activeUsers', $others);
 
-        $result = collect($response['rows'] ?? []);
+        $result = (int) $response['rows'][0][0] ?? 0;
 
         return $result;
     }
