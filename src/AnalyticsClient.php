@@ -79,7 +79,7 @@ class AnalyticsClient
      */
     public function performRealtimeQuery(string $viewId, string $metrics, $others = [])
     {
-        $this->service->data_realtime->get(
+        return $this->service->data_realtime->get(
             "ga:{$viewId}",
             $metrics,
             $others
