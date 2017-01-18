@@ -152,6 +152,38 @@ class Analytics
     }
 
     /**
+     * Get the number of active users currently on the site
+     *
+     * @param  array $others
+     * @return int
+     */
+    public function getActiveUsers($others = array())
+    {
+        $response = $this->performRealtimeQuery('rt:activeUsers', $others);
+
+        $result = collect($response['rows'] ?? []);
+
+        return $result;
+    }
+
+    /**
+     * Call the realtime query method on the authenticated client.
+     *
+     * @param  string $metrics
+     * @param  array  $others
+     *
+     * @return array|null
+     */
+    public function performRealtimeQuery(string $metrics, array $others = [])
+    {
+        return $this->client->performRealtimeQuery(
+            $this->viewId,
+            $metrics,
+            $others
+        );
+    }
+
+    /**
      * Call the query method on the authenticated client.
      *
      * @param Period $period
